@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}SSRF - URL Fetcher{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h2><i class="bi bi-globe"></i> SSRF &raquo; URL Fetcher</h2>
+    <a href="/vuln/ssrf/" class="btn btn-outline-secondary btn-sm mb-3">&larr; Back to SSRF Lab</a>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-body">
+                    <form method="POST" action="/vuln/ssrf/fetch">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="url" placeholder="Enter URL to fetch" value="{{ url or '' }}">
+                            <button class="btn btn-danger" type="submit">Fetch</button>
+                        </div>
+                    </form>
+
+                    {% if error %}
+                    <div class="alert alert-danger mt-3">{{ error }}</div>
+                    {% endif %}
+
+                    {% if content %}
+                    <div class="output-box mt-3">{{ content }}</div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="vuln-hint">
+                <strong><i class="bi bi-lightbulb"></i> Try:</strong>
+                <ul class="small mb-0">
+                    <li><code>http://localhost:5000/</code></li>
+                    <li><code>file:///etc/passwd</code></li>
+                    <li><code>http://169.254.169.254/</code></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

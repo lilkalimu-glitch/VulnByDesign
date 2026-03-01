@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}SSRF - Webhook{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h2><i class="bi bi-globe"></i> SSRF &raquo; Webhook</h2>
+    <a href="/vuln/ssrf/" class="btn btn-outline-secondary btn-sm mb-3">&larr; Back to SSRF Lab</a>
+
+    <div class="card">
+        <div class="card-body">
+            <form method="POST" action="/vuln/ssrf/webhook">
+                <div class="mb-3">
+                    <label for="webhook_url" class="form-label">Webhook URL</label>
+                    <input type="text" class="form-control" id="webhook_url" name="webhook_url"
+                           placeholder="https://your-server.com/webhook" value="{{ url or '' }}">
+                </div>
+                <button type="submit" class="btn btn-danger">Send Test Webhook</button>
+            </form>
+
+            {% if status %}
+            <div class="alert alert-info mt-3">{{ status }}</div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="vuln-hint mt-3">
+        <strong><i class="bi bi-lightbulb"></i> Vuln:</strong> The server sends a POST request to any URL without validation. Use it to scan internal ports or access internal services.
+    </div>
+</div>
+{% endblock %}

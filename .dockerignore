@@ -1,0 +1,11 @@
+__pycache__
+*.py[cod]
+.git
+.gitignore
+.venv
+venv
+db/*.db
+*.md
+.vscode
+.idea
+.DS_Store

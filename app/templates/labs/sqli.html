@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}SQL Injection - VulnByDesign{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1><i class="bi bi-database"></i> SQL Injection Lab</h1>
+    <span class="badge badge-critical">CRITICAL</span>
+    <span class="badge bg-secondary">A03:2021 Injection</span>
+    <hr>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card mb-4">
+                <div class="card-header"><i class="bi bi-search"></i> Product Search</div>
+                <div class="card-body">
+                    <form method="GET" action="/vuln/sqli/search">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="q" placeholder="Search products..." value="{{ search_term or '' }}">
+                            <button class="btn btn-danger" type="submit">Search</button>
+                        </div>
+                    </form>
+
+                    {% if query_used %}
+                    <div class="output-box mt-3">SQL: {{ query_used }}</div>
+                    {% endif %}
+
+                    {% if error %}
+                    <div class="alert alert-danger mt-3">{{ error }}</div>
+                    {% endif %}
+
+                    {% if results %}
+                    <table class="table table-dark table-hover mt-3">
+                        <thead><tr><th>ID</th><th>Name</th><th>Description</th><th>Price</th></tr></thead>
+                        <tbody>
+                        {% for row in results %}
+                            <tr>
+                                {% for col in row %}
+                                <td>{{ col }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header"><i class="bi bi-person-badge"></i> User Lookup</div>
+                <div class="card-body">
+                    <p>Look up a user by their ID:</p>
+                    <a href="/vuln/sqli/user-lookup?id=1" class="btn btn-outline-danger btn-sm">User ID 1</a>
+                    <a href="/vuln/sqli/user-lookup?id=2" class="btn btn-outline-danger btn-sm">User ID 2</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="vuln-hint">
+                <h6><i class="bi bi-lightbulb"></i> Hints</h6>
+                <ul class="small mb-0">
+                    <li>Try: <code>' OR 1=1 --</code></li>
+                    <li>Union: <code>' UNION SELECT id,username,password,email FROM users --</code></li>
+                    <li>User lookup: <code>1 OR 1=1</code></li>
+                </ul>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h6><i class="bi bi-book"></i> Learn More</h6>
+                    <p class="small">SQL Injection occurs when user input is concatenated directly into SQL queries without proper parameterization.</p>
+                    <p class="small mb-0"><strong>Fix:</strong> Use parameterized queries / prepared statements.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

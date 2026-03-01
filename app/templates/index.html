@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}VulnByDesign - Security Training Labs{% endblock %}
+
+{% block content %}
+<!-- Hero -->
+<div class="hero-banner text-center">
+    <div class="container">
+        <h1 class="display-4 fw-bold mb-3">
+            <i class="bi bi-shield-exclamation" style="color: var(--vbd-accent);"></i> VulnByDesign
+        </h1>
+        <p class="lead text-muted mb-4">
+            A deliberately vulnerable web application for learning offensive and defensive security.
+        </p>
+        <div class="d-flex justify-content-center gap-3">
+            {% if not user %}
+            <a href="/auth/login" class="btn btn-danger btn-lg"><i class="bi bi-box-arrow-in-right"></i> Login</a>
+            <a href="/auth/register" class="btn btn-outline-light btn-lg"><i class="bi bi-person-plus"></i> Register</a>
+            {% endif %}
+        </div>
+        <div class="mt-3">
+            <span class="badge bg-danger">7 Vulnerability Labs</span>
+            <span class="badge bg-secondary">OWASP Top 10</span>
+            <span class="badge bg-secondary">Beginner Friendly</span>
+        </div>
+    </div>
+</div>
+
+<!-- Labs Grid -->
+<div class="container my-5">
+    <h2 class="mb-4"><i class="bi bi-grid"></i> Vulnerability Labs</h2>
+    <div class="row g-4">
+        {% for lab in labs %}
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h5 class="card-title mb-0">
+                            <i class="bi bi-{{ lab.icon }}"></i> {{ lab.name }}
+                        </h5>
+                        <span class="badge badge-{{ lab.severity }}">{{ lab.severity | upper }}</span>
+                    </div>
+                    <p class="text-muted small mb-2">{{ lab.owasp }}</p>
+                    <p class="card-text">{{ lab.description }}</p>
+                </div>
+                <div class="card-footer bg-transparent border-top border-secondary">
+                    <a href="{{ lab.url }}" class="btn btn-outline-danger btn-sm w-100">
+                        <i class="bi bi-play-circle"></i> Launch Lab
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Quick Start -->
+<div class="container mb-5">
+    <div class="card">
+        <div class="card-body">
+            <h4><i class="bi bi-lightning-charge"></i> Quick Start</h4>
+            <div class="row mt-3">
+                <div class="col-md-4">
+                    <h6>1. Login</h6>
+                    <p class="text-muted small">Use default credentials: <code>admin / admin123</code> or register a new account.</p>
+                </div>
+                <div class="col-md-4">
+                    <h6>2. Pick a Lab</h6>
+                    <p class="text-muted small">Choose a vulnerability category above. Each lab contains hints and explanations.</p>
+                </div>
+                <div class="col-md-4">
+                    <h6>3. Exploit &amp; Learn</h6>
+                    <p class="text-muted small">Try to exploit the vulnerability, then read the explanation to understand the fix.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
