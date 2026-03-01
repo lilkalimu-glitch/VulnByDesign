@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}IDOR Lab - VulnByDesign{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1><i class="bi bi-key"></i> Insecure Direct Object Reference Lab</h1>
+    <span class="badge badge-high">HIGH</span>
+    <span class="badge bg-secondary">A01:2021 Broken Access Control</span>
+    <hr>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5>User Profiles</h5>
+                    <p class="text-muted small">Access any user's profile by changing the ID in the URL.</p>
+                    <a href="/vuln/idor/profile/1" class="btn btn-outline-danger btn-sm">View Profile (ID: 1)</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5>Order Details</h5>
+                    <p class="text-muted small">View any order by manipulating the order ID.</p>
+                    <a href="/vuln/idor/orders/1" class="btn btn-outline-danger btn-sm">View Order (ID: 1)</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5>Messages API</h5>
+                    <p class="text-muted small">Unauthenticated API access to private messages.</p>
+                    <a href="/vuln/idor/api/messages/1" class="btn btn-outline-danger btn-sm">Get Message (ID: 1)</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vuln-hint mt-4">
+        <strong><i class="bi bi-lightbulb"></i> Hint:</strong> Try incrementing or decrementing the IDs in the URL to access other users' data. There is no authorization check.
+    </div>
+</div>
+{% endblock %}

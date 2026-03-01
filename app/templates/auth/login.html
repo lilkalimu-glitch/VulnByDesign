@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Login - VulnByDesign{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-body p-4">
+                    <h3 class="text-center mb-4"><i class="bi bi-box-arrow-in-right"></i> Login</h3>
+                    <form method="POST" action="/auth/login">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-danger w-100">Login</button>
+                    </form>
+                    <hr>
+                    <p class="text-center text-muted small mb-0">
+                        Don't have an account? <a href="/auth/register">Register here</a>
+                    </p>
+                </div>
+            </div>
+            <div class="vuln-hint mt-3">
+                <strong><i class="bi bi-lightbulb"></i> Hint:</strong> The login form is vulnerable to SQL injection. Try <code>' OR '1'='1' --</code> as the username.
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

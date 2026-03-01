@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}SSRF Lab - VulnByDesign{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1><i class="bi bi-globe"></i> Server-Side Request Forgery Lab</h1>
+    <span class="badge badge-critical">CRITICAL</span>
+    <span class="badge bg-secondary">A10:2021 SSRF</span>
+    <hr>
+
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5>URL Fetcher</h5>
+                    <p class="text-muted small">Fetch and display content from any URL. No restrictions on target hosts.</p>
+                    <a href="/vuln/ssrf/fetch" class="btn btn-outline-danger btn-sm">Launch</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5>Webhook Configuration</h5>
+                    <p class="text-muted small">Configure a webhook callback URL. The server makes a POST request to the provided URL.</p>
+                    <a href="/vuln/ssrf/webhook" class="btn btn-outline-danger btn-sm">Launch</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vuln-hint mt-4">
+        <strong><i class="bi bi-lightbulb"></i> Hint:</strong> Try accessing internal services:
+        <code>http://localhost:5000/</code>,
+        <code>http://127.0.0.1:8080/admin</code>,
+        <code>http://169.254.169.254/latest/meta-data/</code> (AWS metadata)
+    </div>
+</div>
+{% endblock %}

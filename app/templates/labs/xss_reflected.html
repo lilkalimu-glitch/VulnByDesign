@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Reflected XSS - VulnByDesign{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h2><i class="bi bi-code"></i> XSS &raquo; Reflected</h2>
+    <a href="/vuln/xss/" class="btn btn-outline-secondary btn-sm mb-3">&larr; Back to XSS Lab</a>
+
+    <div class="card">
+        <div class="card-body">
+            <form method="GET" action="/vuln/xss/reflected">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="q" placeholder="Search..." value="">
+                    <button class="btn btn-danger" type="submit">Search</button>
+                </div>
+            </form>
+
+            {% if query %}
+            <div class="mt-3">
+                <p>Search results for: {{ query }}</p>
+                <p class="text-muted">No results found.</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="vuln-hint mt-3">
+        <strong><i class="bi bi-lightbulb"></i> Hint:</strong> Try <code>&lt;script&gt;alert('XSS')&lt;/script&gt;</code> or <code>&lt;img src=x onerror=alert('XSS')&gt;</code>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}About - VulnByDesign{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1><i class="bi bi-info-circle"></i> About VulnByDesign</h1>
+    <hr>
+
+    <div class="row mt-4">
+        <div class="col-lg-8">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h4>What is VulnByDesign?</h4>
+                    <p>VulnByDesign is an <strong>intentionally vulnerable web application</strong> built for security enthusiasts, students, and professionals to practice identifying and exploiting common web vulnerabilities in a safe, legal environment.</p>
+                    <p>Each lab focuses on a specific vulnerability class from the <strong>OWASP Top 10</strong> and includes:</p>
+                    <ul>
+                        <li>A realistic vulnerable feature to exploit</li>
+                        <li>Hints to guide your testing</li>
+                        <li>Explanations of the root cause and remediation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h4>Covered Vulnerabilities</h4>
+                    <table class="table table-dark table-bordered">
+                        <thead>
+                            <tr><th>Lab</th><th>OWASP Category</th><th>Severity</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>SQL Injection</td><td>A03:2021 Injection</td><td><span class="severity-critical">Critical</span></td></tr>
+                            <tr><td>Cross-Site Scripting</td><td>A03:2021 Injection</td><td><span class="severity-high">High</span></td></tr>
+                            <tr><td>CSRF</td><td>A01:2021 Broken Access Control</td><td><span class="severity-high">High</span></td></tr>
+                            <tr><td>IDOR</td><td>A01:2021 Broken Access Control</td><td><span class="severity-high">High</span></td></tr>
+                            <tr><td>Command Injection</td><td>A03:2021 Injection</td><td><span class="severity-critical">Critical</span></td></tr>
+                            <tr><td>File Upload</td><td>A04:2021 Insecure Design</td><td><span class="severity-high">High</span></td></tr>
+                            <tr><td>SSRF</td><td>A10:2021 SSRF</td><td><span class="severity-critical">Critical</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card border-danger mb-4">
+                <div class="card-body">
+                    <h5 class="text-danger"><i class="bi bi-exclamation-triangle"></i> Disclaimer</h5>
+                    <p class="small">This application is <strong>intentionally insecure</strong>. It is designed for educational purposes only.</p>
+                    <ul class="small">
+                        <li>Never deploy on public networks</li>
+                        <li>Use only in isolated lab environments</li>
+                        <li>Never use these techniques on systems without authorization</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h5><i class="bi bi-stack"></i> Tech Stack</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="bi bi-check-circle text-success"></i> Python / Flask</li>
+                        <li><i class="bi bi-check-circle text-success"></i> SQLite</li>
+                        <li><i class="bi bi-check-circle text-success"></i> Bootstrap 5</li>
+                        <li><i class="bi bi-check-circle text-success"></i> Docker</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

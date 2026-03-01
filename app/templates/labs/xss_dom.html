@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}DOM-based XSS - VulnByDesign{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h2><i class="bi bi-code"></i> XSS &raquo; DOM-based</h2>
+    <a href="/vuln/xss/" class="btn btn-outline-secondary btn-sm mb-3">&larr; Back to XSS Lab</a>
+
+    <div class="card">
+        <div class="card-body">
+            <h5>Welcome Message</h5>
+            <p>This page reads your name from the URL hash and displays a greeting.</p>
+            <div id="greeting" class="alert alert-info"></div>
+            <p class="text-muted small">Try visiting: <code>/vuln/xss/dom#YourName</code></p>
+        </div>
+    </div>
+
+    <div class="vuln-hint mt-3">
+        <strong><i class="bi bi-lightbulb"></i> Hint:</strong>
+        The JavaScript below uses <code>innerHTML</code> with <code>location.hash</code>.
+        Try: <code>#&lt;img src=x onerror=alert('DOM-XSS')&gt;</code>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    // VULN: DOM-based XSS - innerHTML with unsanitized location.hash
+    var name = decodeURIComponent(location.hash.substring(1)) || "Guest";
+    document.getElementById("greeting").innerHTML = "Hello, " + name + "! Welcome to VulnByDesign.";
+</script>
+{% endblock %}

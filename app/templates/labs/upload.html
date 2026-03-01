@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}File Upload Lab - VulnByDesign{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1><i class="bi bi-upload"></i> Unrestricted File Upload Lab</h1>
+    <span class="badge badge-high">HIGH</span>
+    <span class="badge bg-secondary">A04:2021 Insecure Design</span>
+    <hr>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card mb-4">
+                <div class="card-header">Upload a File</div>
+                <div class="card-body">
+                    <form method="POST" action="/vuln/upload/submit" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <input type="file" class="form-control" name="file" required>
+                        </div>
+                        <button type="submit" class="btn btn-danger">Upload</button>
+                    </form>
+                </div>
+            </div>
+
+            {% if files %}
+            <div class="card">
+                <div class="card-header">Uploaded Files</div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        {% for f in files %}
+                        <li class="list-group-item bg-transparent">
+                            <a href="/vuln/upload/files/{{ f }}">{{ f }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="col-lg-4">
+            <div class="vuln-hint">
+                <strong><i class="bi bi-lightbulb"></i> Vulnerabilities:</strong>
+                <ul class="small mb-0">
+                    <li>No file type validation</li>
+                    <li>No file size limit</li>
+                    <li>Original filename preserved</li>
+                    <li>Files served directly</li>
+                </ul>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h6><i class="bi bi-book"></i> Exploit Ideas</h6>
+                    <ul class="small mb-0">
+                        <li>Upload a web shell (.php, .py, .jsp)</li>
+                        <li>Upload an HTML file with JavaScript (stored XSS)</li>
+                        <li>Path traversal: <code>../../etc/cron.d/backdoor</code></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
