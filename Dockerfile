@@ -1,6 +1,6 @@
 FROM python:3.12-slim
 
-LABEL maintainer="VulnByDesign"
+LABEL maintainer="Kalimu <lilkalimu-glitch@users.noreply.github.com>"
 LABEL description="Intentionally vulnerable web application for security education"
 
 # Install system utilities used by Command Injection lab
